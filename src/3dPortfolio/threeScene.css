@@ -1,0 +1,134 @@
+/* Container for the greeting after loading */
+/* Container for the greeting, now positioned on the left side of the screen */
+.greeting-container {
+  position: fixed;  /* Fixed position to make it stay in the same place */
+  top: 50%;         /* Centers vertically */
+  left: 5%;        /* Positions the container 10% from the left side of the screen */
+  transform: translateY(-50%);  /* Centers vertically, no horizontal centering */
+  text-align: left;  /* Align text to the left */
+  background-color: transparent;  /* Transparent background */
+  z-index: 10;  /* Ensures it's above other content */
+  padding: 20px;
+  max-width: 80%; /* Limit the width to avoid excessive stretching on larger screens */
+  box-sizing: border-box;  /* Ensure padding doesn't affect the overall size */
+}
+
+/* Style for the greeting text */
+.greeting-text {
+  color: white; /* Text color */
+  font-family: Arial, sans-serif; /* Clean, modern font */
+}
+
+/* Styling for the main greeting message */
+.greeting-text h5 {
+  font-size: 1.5em;  /* Large font size */
+  font-weight: bold;  /* Make the name stand out */
+  color: #ffcc66;
+  margin-bottom: 10px;  /* Space between heading and paragraph */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);  /* Slight shadow for better readability */
+}
+
+/* Styling for the subtitle message */
+.greeting-text .welcome{
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;  /* Smaller size for the subtitle */
+  color: #ddd;  /* Light gray for a softer look */
+  margin-top: 0; /* Remove default margin */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);  /* Light shadow for readability */
+}
+
+
+/* Optional: Add a slight animation for when the greeting appears */
+.greeting-container {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.options .seePortfolio{
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 0.8em;
+  color: #000000;
+  background-color: #ffcc66; /* Steel blue for button */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.options .seePortfolio:hover{
+  background-color: #ffcc66; /* Lightened steel blue on hover */
+  transform: scale(1.05);
+}
+
+.resetBtnOption{
+  position: fixed;  /* Fixed position to make it stay in the same place */
+  bottom: 5%;         /* Centers vertically */
+  right: 5%;        /* Positions the container 10% from the left side of the screen */
+  /* transform: translateY(-50%);  Centers vertically, no horizontal centering */
+}
+
+.resetBtnOption .resetBtn{
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 0.8em;
+  color: #000000;
+  background-color: #ffcc66; /* Steel blue for button */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.resetBtnOption .resetBtn:hover{
+  background-color: #ffcc66; /* Lightened steel blue on hover */
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/* Style for the greeting text */
+.greeting-text {
+  color: white; /* Text color */
+  font-family: Arial, sans-serif; /* Clean, modern font */
+}
+
+/* Styling for the main greeting message */
+.greeting-text h1 {
+  font-size: 3em;  /* Large font size */
+  font-weight: bold;  /* Make the name stand out */
+  margin-bottom: 10px;  /* Space between heading and paragraph */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);  /* Slight shadow for better readability */
+}
+
+/* Styling for the subtitle message */
+.greeting-text p {
+  font-size: 1.5em;  /* Smaller size for the subtitle */
+  color: #ddd;  /* Light gray for a softer look */
+  margin-top: 0; /* Remove default margin */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);  /* Light shadow for readability */
+}
+
+/* Optional: Add a slight animation for when the greeting appears */
+.greeting-container {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

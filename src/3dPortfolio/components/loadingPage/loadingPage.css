@@ -1,0 +1,73 @@
+.loading-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ffffff;
+    background-color: rgb(0, 0, 0); /* Darker with slight blue tone */
+    padding: 30px;
+    border-radius: 15px;
+  }
+  
+  .floating-container {
+    animation: floating 3s ease-in-out infinite;
+  }
+  
+  @keyframes floating {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .greeting {
+    font-size: 1.5em;
+    margin-bottom: 7px;
+    color: #ffcc66; /* Soft sky blue for text */
+  }
+  
+  .loading-text {
+    font-size: 0.8em;
+    margin-bottom: 15px;
+    color: #a9a9b3; /* Light grayish blue */
+  }
+  
+  .loader {
+    margin: 15px auto;
+    border: none; /* Light cornflower blue */
+    border-top: 5px solid #ffcc66; /* Steel blue for loader top */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .view-portfolio-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 0.8em;
+    color: #fff;
+    background-color: #ffcc66; /* Steel blue for button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .view-portfolio-btn:hover {
+    background-color: #ffcc66; /* Lightened steel blue on hover */
+    transform: scale(1.05);
+  }
+  
