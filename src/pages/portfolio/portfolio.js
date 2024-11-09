@@ -24,11 +24,11 @@ const Portfolio = () => {
   ];
 
   const skills = [
-    { name: "Python", level: 90 },
-    { name: "Flask/FastAPI", level: 85 },
+    { name: "Python", level: 80 },
+    { name: "Flask/FastAPI", level: 70 },
     { name: "Node.js", level: 80 },
     { name: "Angular", level: 85 },
-    { name: "MongoDB", level: 85 },
+    { name: "MongoDB", level: 80 },
     { name: "React", level: 40 },
     { name: "Problem Solving", level: 70 },
   ];
