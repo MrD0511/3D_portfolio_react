@@ -17,9 +17,9 @@ function CameraControls({ screenPositionRef, setOrbitEnabled }, ref) {
 
       // Animate camera position to move in front of the screen and look at the targetObject
       gsap.to(camera.position, {
-        x: screenPositionRef.current.x - 0.32,
+        x: screenPositionRef.current.x - 0.34,
         y: screenPositionRef.current.y,
-        z: screenPositionRef.current.z - 1.2,
+        z: screenPositionRef.current.z - 1.3,
         duration: 2,
         ease: 'power2.inOut',
         onComplete: () => {

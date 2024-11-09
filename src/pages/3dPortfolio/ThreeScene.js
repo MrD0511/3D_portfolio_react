@@ -54,19 +54,20 @@ function ModelWithScreen({ screenPositionRef, sceneLoading, setSceneLoading }) {
             rotation={[0, 0.26, 0]}
             distanceFactor={1.5}
             style={{
-              width: '480px',
-              height: '360px',
+              width: '520px',
+              height: '400px',
               backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              overflow: 'auto',
+              overflowY: 'auto',
               border: '4px solid #333',
               boxShadow: '0px 0px 15px rgba(0, 255, 0, 0.3)',
               position: 'relative',
               scrollbarWidth: 'thin',
+
             }}
             occlude
           >
             <CRTBrowserWindow>
-              <Portfolio style={{ width: '100%', height: '100%' }} />
+              <Portfolio />
             </CRTBrowserWindow>
           </Html>
         </mesh>
@@ -123,7 +124,7 @@ export default function ThreeScene() {
   // Trigger moveToScreen on button click
   const moveToScreen = () => {
     if (CameraControlsRef.current) {
-      setOrbitEnabled(true)
+      setOrbitEnabled(false)
       setLookingAtScreen(true)
 
       gsap.to(sceneTarget, {
