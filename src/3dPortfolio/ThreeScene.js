@@ -22,7 +22,7 @@ function LightBulb() {
 }
 
 function ModelWithScreen({ screenPositionRef, sceneLoading, setSceneLoading }) {
-  const { scene } = useGLTF('/scene_12.glb');
+  const { scene } = useGLTF('/scene_compressed.glb' );
 
   useEffect(()=>{
     if(scene && sceneLoading){
