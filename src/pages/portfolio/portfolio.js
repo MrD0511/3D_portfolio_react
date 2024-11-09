@@ -7,19 +7,19 @@ const Portfolio = () => {
 
   const projects = [
     {
-      title: "Project 1",
-      description: "A full-stack web application with user authentication, data analytics, and interactive UI.",
-      tech: ["React", "Node.js", "MongoDB"],
+      title: "3D Portfolio",
+      description: "A 3D portfolio built with Three.js and React JS, showcasing my projects and skills in an interactive manner.",
+      tech: ["Three.js", "React", "JavaScript"],
     },
     {
-      title: "Project 2", 
-      description: "RESTful API development for managing product data in an e-commerce application.",
-      tech: ["FastAPI", "Python", "MongoDB"],
+      title: "Chat App",
+      description: "Building a Chat App using React, FastAPI, and MongoDB. Adding encryption and multi-device support.",
+      tech: ["React", "FastAPI", "MongoDB"],
     },
     {
-      title: "Project 3",
-      description: "Frontend development for a storytelling app with collaborative writing features.",
-      tech: ["Angular", "TypeScript", "Bootstrap"],
+      title: "Social Media App",
+      description: "A simple social media app using Flask and Bootstrap, featuring user authentication and post creation.",
+      tech: ["Flask", "Bootstrap", "Python"],
     },
   ];
 
@@ -42,68 +42,66 @@ const Portfolio = () => {
   return (
     <div className="bg-black text-white font-sans">
       {/* Navigation */}
-{/* Navigation */}
-<nav className="sticky top-0 z-50 bg-black border-b border-[#ffcc66]/20 p-4">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6">
-    <div className="flex justify-between items-center">
-      <h1 className="text-lg sm:text-base font-bold text-[#ffcc66]">Dhruv Sharma</h1>
+      <nav className="sticky top-0 z-50 bg-black border-b border-[#ffcc66]/20 p-2">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg sm:text-base font-bold text-[#ffcc66]">Dhruv Sharma</h1>
 
-      {/* Mobile Menu Button */}
-      <button
-        className="sm:hidden hover:bg-[#ffcc66]/10 p-2 rounded-lg transition-colors"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        {isMenuOpen ? (
-          <X size={24} className="text-[#ffcc66]" />
-        ) : (
-          <Menu size={24} className="text-[#ffcc66]" />
+            {/* Mobile Menu Button */}
+            <button
+              className="sm:hidden hover:bg-[#ffcc66]/10 p-2 rounded-lg transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X size={24} className="text-[#ffcc66]" />
+              ) : (
+                <Menu size={24} className="text-[#ffcc66]" />
+              )}
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden sm:flex space-x-2">
+              {["home", "skills", "experience", "projects", "contact"].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => setActiveSection(section)}
+                  className={`capitalize px-1 py-1 rounded-lg transition-all duration-300 text-xs sm:text-xs ${
+                    activeSection === section
+                      ? "bg-[#ffcc66] text-black font-medium"
+                      : "text-[#ffcc66] hover:bg-[#ffcc66]/10"
+                  }`}
+                >
+                  {section}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-black border-b border-[#ffcc66]/20 z-40">
+            <div className="max-w-6xl mx-auto px-4 py-2 space-y-1">
+              {["home", "skills", "experience", "projects", "contact"].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => {
+                    setActiveSection(section);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`w-full text-left capitalize px-3 py-2 rounded-lg transition-all duration-300 text-sm sm:text-base ${
+                    activeSection === section
+                      ? "bg-[#ffcc66] text-black font-medium"
+                      : "text-[#ffcc66] hover:bg-[#ffcc66]/10"
+                  }`}
+                >
+                  {section}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
-      </button>
-
-      {/* Desktop Navigation */}
-      <div className="hidden sm:flex space-x-3">
-        {["home", "about", "skills", "projects", "contact"].map((section) => (
-          <button
-            key={section}
-            onClick={() => setActiveSection(section)}
-            className={`capitalize px-1 py-1 rounded-lg transition-all duration-300 text-xs sm:text-sm ${
-              activeSection === section
-                ? "bg-[#ffcc66] text-black font-medium"
-                : "text-[#ffcc66] hover:bg-[#ffcc66]/10"
-            }`}
-          >
-            {section}
-          </button>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  {/* Mobile Menu */}
-  {isMenuOpen && (
-    <div className="md:hidden absolute top-full left-0 right-0 bg-black border-b border-[#ffcc66]/20 z-40">
-      <div className="max-w-6xl mx-auto px-4 py-2 space-y-1">
-        {["home", "about", "skills", "projects", "contact"].map((section) => (
-          <button
-            key={section}
-            onClick={() => {
-              setActiveSection(section);
-              setIsMenuOpen(false);
-            }}
-            className={`w-full text-left capitalize px-3 py-2 rounded-lg transition-all duration-300 text-sm sm:text-base ${
-              activeSection === section
-                ? "bg-[#ffcc66] text-black font-medium"
-                : "text-[#ffcc66] hover:bg-[#ffcc66]/10"
-            }`}
-          >
-            {section}
-          </button>
-        ))}
-      </div>
-    </div>
-  )}
-</nav>
-
+      </nav>
 
       {/* Main Content Wrapper */}
       <div className="flex flex-col min-h-screen pt-20 bg-black">
@@ -117,8 +115,22 @@ const Portfolio = () => {
                 Dhruv Sharma
               </h2>
               <p className="mt-4 text-lg sm:text-base text-gray-300 text-center">
-                Hello! I'm Dhruv Sharma, a passionate backend developer with a love for building robust applications.
+                Hello! I'm Dhruv Sharma, a passionate developer and a student at SVIT Vasad College in Gujarat. I'm currently in my prefinal year, pursuing Computer Engineering.
               </p>
+              <div className="flex space-x-4 mt-6">
+                <button
+                  onClick={() => setActiveSection("projects")}
+                  className="bg-[#ffcc66] text-black px-6 py-2 rounded-lg font-medium hover:bg-[#ffcc66]/90 transition-colors"
+                >
+                  View Projects
+                </button>
+                <button
+                  onClick={() => setActiveSection("about")}
+                  className="border border-[#ffcc66] text-[#ffcc66] px-6 py-2 rounded-lg font-medium hover:bg-[#ffcc66]/10 transition-colors"
+                >
+                  About Me
+                </button>
+              </div>
             </div>
           </div>
 
@@ -126,10 +138,7 @@ const Portfolio = () => {
           <div className={renderSection("about")}>
             <h2 className="text-2xl sm:text-3xl text-lg font-bold text-[#ffcc66]">About Me</h2>
             <p className="mt-4 text-gray-300 text-sm sm:text-base">
-              I am a backend developer with a knack for designing APIs, handling complex data flows, and ensuring performance optimization. I enjoy leveraging technologies like Node.js and Python frameworks (Flask, FastAPI) to build applications that prioritize efficiency and scalability.
-            </p>
-            <p className="mt-4 text-gray-300 text-sm sm:text-base">
-              I am currently pursuing my studies in Computer Engineering and continue to expand my skills through hands-on projects and challenges.
+              I love to explore things and am always learning every day. Problem-solving is one of my strengths, and I enjoy tackling challenges with creative solutions. I'm continuously improving my skills through hands-on projects and real-world experience.
             </p>
           </div>
 
@@ -174,19 +183,57 @@ const Portfolio = () => {
             </div>
           </div>
 
+          {/* Experience Section */}
+          <div className={renderSection("experience")}>
+            <h2 className="text-2xl sm:text-3xl text-lg font-bold text-[#ffcc66] mb-6">Experience</h2>
+            <div className="bg-black border border-[#ffcc66]/20 rounded-lg p-6 hover:border-[#ffcc66] transition-colors">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold text-[#ffcc66]">Full Stack Developer Intern</h3>
+                  <p className="text-gray-400 text-sm mt-1">Pintube Pvt Ltd, London (Remote)</p>
+                </div>
+                <span className="text-gray-400 text-sm mt-2 sm:mt-0">8 months</span>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex items-start">
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc66] mt-2 mr-3"></div>
+                  <p className="text-gray-300 text-sm sm:text-base">Built a scalable full-stack web application from scratch</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc66] mt-2 mr-3"></div>
+                  <p className="text-gray-300 text-sm sm:text-base">Implemented complex features using AngularJS and Node.js</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc66] mt-2 mr-3"></div>
+                  <p className="text-gray-300 text-sm sm:text-base">Managed both MongoDB and SQL databases for different application components</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-2 mt-6">
+                <span className="bg-[#ffcc66]/10 text-[#ffcc66] px-3 py-1 rounded-full text-sm">AngularJS</span>
+                <span className="bg-[#ffcc66]/10 text-[#ffcc66] px-3 py-1 rounded-full text-sm">Node.js</span>
+                <span className="bg-[#ffcc66]/10 text-[#ffcc66] px-3 py-1 rounded-full text-sm">MongoDB</span>
+                <span className="bg-[#ffcc66]/10 text-[#ffcc66] px-3 py-1 rounded-full text-sm">SQL</span>
+              </div>
+            </div>
+          </div>
+
           {/* Contact Section */}
           <div className={renderSection("contact")}>
             <h2 className="text-2xl sm:text-3xl text-lg font-bold text-[#ffcc66]">Contact</h2>
-            <p className="mt-4 text-gray-300 text-sm sm:text-base">Feel free to reach out to me through any of the following links.</p>
-            <div className="mt-4 flex gap-4">
-              <a href="https://github.com/dhruv" target="_blank" rel="noopener noreferrer" className="text-[#ffcc66]">
-                <Github size={24} />
+            <p className="mt-4 text-gray-300 text-sm sm:text-base">
+              Feel free to reach out to me through any of the following links.
+            </p>
+            <div className="flex space-x-4 mt-4">
+              <a href="https://github.com/MrD0511" target="_blank" rel="noopener noreferrer">
+                <Github size={24} className="text-[#ffcc66]" />
               </a>
-              <a href="https://linkedin.com/in/dhruv" target="_blank" rel="noopener noreferrer" className="text-[#ffcc66]">
-                <Linkedin size={24} />
+              <a href="https://linkedin.com/in/dhruv-sharma-d005" target="_blank" rel="noopener noreferrer">
+                <Linkedin size={24} className="text-[#ffcc66]" />
               </a>
-              <a href="mailto:dhruv@example.com" className="text-[#ffcc66]">
-                <Mail size={24} />
+              <a href="mailto:sharmadhruv00005@gmail.com">
+                <Mail size={24} className="text-[#ffcc66]" />
               </a>
             </div>
           </div>

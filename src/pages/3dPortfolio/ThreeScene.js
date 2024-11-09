@@ -48,24 +48,40 @@ function ModelWithScreen({ screenPositionRef, sceneLoading, setSceneLoading }) {
       <group>
         <primitive object={scene} scale={[0.5, 0.5, 0.5]} />
         <mesh>
-          <Html
-            transform
-            position={[0.5, 6.6, 0.47]}
-            rotation={[0, 0.26, 0]}
-            distanceFactor={1.5}
-            style={{
-              width: '520px',
-              height: '400px',
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              overflowY: 'auto',
-              border: '4px solid #333',
-              boxShadow: '0px 0px 15px rgba(0, 255, 0, 0.3)',
-              position: 'relative',
-              scrollbarWidth: 'thin',
-
-            }}
-            occlude
-          >
+        <Html
+          transform
+          position={[0.5, 6.6, 0.47]}
+          rotation={[0, 0.26, 0]}
+          distanceFactor={1.5}
+          style={{
+            width: '520px',
+            height: '400px',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            overflowY: 'auto',
+            border: '4px solid #333',
+            boxShadow: '0px 0px 15px rgba(0, 255, 0, 0.3)',
+            position: 'relative',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#444444 #1a1a1a',
+            
+            // WebKit scrollbar styling
+            '&::-webkit-scrollbar': {
+              width: '4px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: '#1a1a1a',
+              borderRadius: '3px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: '#444444',
+              borderRadius: '3px',
+              '&:hover': {
+                background: '#555555',
+              }
+            },
+          }}
+          occlude
+        >
             <CRTBrowserWindow>
               <Portfolio />
             </CRTBrowserWindow>
