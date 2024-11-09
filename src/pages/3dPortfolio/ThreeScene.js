@@ -2,7 +2,7 @@ import React, { Suspense, useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, Stars, Html } from '@react-three/drei';
 import { Vector3 } from 'three';
-import Portfolio from '../portfolio';
+import Portfolio from '../portfolio/portfolio';
 import { gsap } from 'gsap';
 import CRTBrowserWindow from './components/browserPage/browserWindow';
 import LoadingScreen from './components/loadingPage/loadingPage';
@@ -27,9 +27,8 @@ function ModelWithScreen({ screenPositionRef, sceneLoading, setSceneLoading }) {
   useEffect(()=>{
     if(scene && sceneLoading){
       setSceneLoading(false)
-      console.log("scene loaded")
     }
-  },[scene, sceneLoading])
+  },[scene, sceneLoading, setSceneLoading])
 
   useEffect(() => {
     // Set the camera target to the hardcoded position [0.5, 6.6, 0.55]
@@ -184,7 +183,7 @@ export default function ThreeScene() {
           <group rotation={[0, Math.PI, 0]} position={[0, 1, 0]} onClick={()=>{
               setSceneTarget(new Vector3(-0.5, 7.6, -0.23))
               setOrbitEnabled(true)
-
+              setLookingAtScreen(true)
             }} >
             <ModelWithScreen screenPositionRef={screenPositionRef}  sceneLoading={sceneLoading} setSceneLoading={setSceneLoading}/>
             <ReflectiveFloor />

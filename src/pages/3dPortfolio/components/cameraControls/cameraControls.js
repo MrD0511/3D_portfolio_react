@@ -1,11 +1,12 @@
-import React, { useRef, useEffect, useImperativeHandle } from 'react';
+import React, { useRef,useImperativeHandle } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import gsap from 'gsap';
-import * as THREE from 'three';
+// import * as THREE from 'three';
 
 function CameraControls({ screenPositionRef, setOrbitEnabled }, ref) {
-  const { camera, scene } = useThree();
+  // const { camera, scene } = useThree();
+  const {camera} = useThree();
   const isTransitioning = useRef(false);
 
   const initialCameraPosition = new Vector3(22, 14, -30); // Your initial camera position
@@ -48,23 +49,23 @@ function CameraControls({ screenPositionRef, setOrbitEnabled }, ref) {
     });
   };
 
-  useEffect(() => {
-    // Create a dummy object and add it to the scene at the screen position
-    const targetObject = new THREE.Object3D();
-    scene.add(targetObject);
+  // useEffect(() => {
+  //   // Create a dummy object and add it to the scene at the screen position
+  //   const targetObject = new THREE.Object3D();
+  //   scene.add(targetObject);
 
-    const handleKeyPress = (event) => {
-      if (event.key === 's' && screenPositionRef.current) {
-        moveToScreen();
-      }
-    };
+  //   const handleKeyPress = (event) => {
+  //     if (event.key === 's' && screenPositionRef.current) {
+  //       moveToScreen();
+  //     }
+  //   };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress);
-      scene.remove(targetObject); // Cleanup the dummy object
-    };
-  }, [screenPositionRef, camera, scene, setOrbitEnabled]);
+  //   window.addEventListener('keydown', handleKeyPress);
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeyPress);
+  //     scene.remove(targetObject); // Cleanup the dummy object
+  //   };
+  // }, [screenPositionRef, camera, scene, setOrbitEnabled]);
 
   // Expose moveToScreen and resetCameraPosition functions to parent through ref
   useImperativeHandle(ref, () => ({
