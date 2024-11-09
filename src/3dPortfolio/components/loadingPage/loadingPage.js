@@ -11,7 +11,7 @@ function LoadingScreen({ onClickButton }) {
         <p className="loading-text">Please wait, the portfolio is loading...</p>
         
         <button className="view-portfolio-btn" onClick={onClickButton}>
-          View Portfolio
+          Show Anyway
         </button>
       </div>
     </div>
