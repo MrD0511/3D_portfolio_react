@@ -6,7 +6,7 @@ import LoadingScreen from './pages/3dPortfolio/components/loadingPage/loadingPag
 const ThreeScene = lazy(() => import('./pages/3dPortfolio/ThreeScene') )
 const NotFound = lazy(() => import('./pages/notFound/notfound') )
 const Portfolio = lazy(() => import('./pages/portfolio/portfolio') )
-
+const Demo = lazy(() => import('./pages/demo') )
 function App() {
 
   const windowWidth = window.innerWidth;
@@ -25,6 +25,7 @@ function App() {
               <Route path='/' element={<ThreeScene/>} />
               <Route path='/portfolio' element={<Portfolio/>} />
               <Route path="*" element={<NotFound />} />
+              <Route path='/demo' element={<Demo/>} />
             </Routes>
           </Suspense>
         }

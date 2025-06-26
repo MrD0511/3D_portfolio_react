@@ -19,6 +19,19 @@ Welcome to my personal portfolio website! 🚀 This project showcases my skills,
 
 ---
 
+## 📸 Screenshots
+
+### 3D Scene
+![3D Scene](screenshots/3d_scene.png)
+
+### Monitor Screen
+![Monitor Screen](screenshots/monitor_screen.png)
+
+### Portfolio
+![Portfolio](screenshots/portfolio.png)
+
+---
+
 ## 🚀 Setup Instructions
 
 Follow these steps to run the portfolio locally:
@@ -40,12 +53,17 @@ Follow these steps to run the portfolio locally:
 
 ---
 
+## 📄 License
+[MIT License](./LICENSE) © 2025 Dhruv Sharma
+
+---
+
 ## 📧 Contact
 
 Feel free to reach out via Email or connect on LinkedIn.
 
-sharmadhruv00005@gmail.com
-https://www.linkedin.com/in/dhruvsharma005
+[Mail](mailto://sharmadhruv00005@gmail.com) |
+[Linkedin](https://www.linkedin.com/in/dhruvsharma005)
 
 ---
 

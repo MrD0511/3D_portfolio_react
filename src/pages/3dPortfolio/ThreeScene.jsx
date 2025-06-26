@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useEffect, useState } from 'react';
+import React, { Suspense, useRef, useEffect, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, Stars, Html } from '@react-three/drei';
 import { Vector3 } from 'three';
@@ -10,11 +10,57 @@ import { useNavigate } from 'react-router-dom';
 import "./threeScene.css"
 import CameraControls from './components/cameraControls/cameraControls';
 import {ExternalLink} from 'lucide-react'
+import { FloatingOrbs } from '../demo';
 
 const lightBulbPosition = new Vector3(0, 22, 0);
 const htmlCanvasPosition = new Vector3(0.84, 10.57, 0.72);
-const sceneTargetPosition = new Vector3(22, 18, -0.23);
+const sceneTargetPosition = new Vector3(22, 12, -0.23);
 const screenTargetPosition = new Vector3(-0.5, 11.58, -0.23);
+
+function FloatingParticles() {
+  const ref = useRef();
+  const count = 1000;
+
+  const [positions, colors] = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const col = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 200;
+      pos[i * 3 + 1] = Math.random() * 100 - 20;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 200;
+
+      const hue = Math.random() * 0.3 + 0.5;
+      col[i * 3] = hue * 0.2;
+      col[i * 3 + 1] = hue;
+      col[i * 3 + 2] = hue;
+    }
+    return [pos, col];
+  }, [count]);
+
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
+      ref.current.rotation.y = state.clock.elapsedTime * 0.05;
+    }
+  });
+
+  return (
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" array={positions} itemSize={3} count={positions.length / 3} />
+        <bufferAttribute attach="attributes-color" array={colors} itemSize={3} count={colors.length / 3} />
+      </bufferGeometry>
+      <pointsMaterial
+        size={1.5}
+        transparent
+        opacity={0.8}
+        vertexColors
+        blending={THREE.AdditiveBlending}
+        sizeAttenuation
+      />
+    </points>
+  );
+}
 
 function LightBulb() {
   return (
@@ -23,6 +69,54 @@ function LightBulb() {
       <meshBasicMaterial color="#FFF1E0" />
       <pointLight distance={40} decay={1.5} intensity={70} color="#FFF1E0" />
     </mesh>
+  );
+}
+
+function NeuralNetwork() {
+  const nodes = useMemo(() => {
+    const nodeCount = 100;
+    return Array.from({ length: nodeCount }, () => ({
+      position: [
+        (Math.random() - 0.5) * 150,
+        (Math.random() - 0.5) * 80 + 20,
+        (Math.random() - 0.5) * 150
+      ],
+      connections: Math.floor(Math.random() * 3) + 1
+    }));
+  }, []);
+
+  const connections = useMemo(() => {
+    const lines = [];
+    nodes.forEach((node, i) => {
+      for (let j = 0; j < node.connections; j++) {
+        const targetIndex = Math.floor(Math.random() * nodes.length);
+        if (targetIndex !== i) {
+          lines.push([node.position, nodes[targetIndex].position]);
+        }
+      }
+    });
+    return lines;
+  }, [nodes]);
+
+  return (
+    <group>
+      {/* Nodes */}
+      {nodes.map((node, i) => (
+        <mesh key={i} position={node.position}>
+          <sphereGeometry args={[0.2, 8, 8]} />
+          <meshBasicMaterial
+            color="#ff6b6b"
+            transparent
+            opacity={0.8}
+          />
+        </mesh>
+      ))}
+      
+      {/* Connections */}
+      {connections.map((connection, i) => (
+        <ConnectionLine key={i} start={connection[0]} end={connection[1]} />
+      ))}
+    </group>
   );
 }
 
@@ -188,7 +282,7 @@ export default function ThreeScene() {
       });
     }
   }
-
+  
   return (
     <>
       <Canvas
@@ -219,6 +313,8 @@ export default function ThreeScene() {
 
           <LightBulb />
           <Stars radius={50} depth={50} count={300} factor={4} saturation={0} fade speed={2}  />
+
+
           <Environment preset="night" background={false} intensity={0.2} />
         </Suspense>
 
