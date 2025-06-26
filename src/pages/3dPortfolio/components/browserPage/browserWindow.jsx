@@ -2,7 +2,7 @@ import React from 'react';
 
 const CompactCRTBrowserWindow = ({ children }) => {
   return (
-    <div className="w-full max-w-2xl bg-gray-900 rounded-none shadow-lg">
+    <div className="w-full bg-gray-900 rounded-none shadow-lg ">
       <div className="bg-gray-800 px-3 py-1 rounded-t-none flex items-center justify-between">
         <div className="flex items-center">
           <div className="w-2 h-2 rounded-full bg-red-500 mr-1"></div>

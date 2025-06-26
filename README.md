@@ -34,9 +34,9 @@ Follow these steps to run the portfolio locally:
    ```
 3. **Run the Development Server**:
    ```bash
-   npm start
+   npm run dev
    ```
-4. **Open your browser and navigate to http://localhost:3000.**
+4. **Open your browser and navigate to http://localhost:5173.**
 
 ---
 
@@ -45,7 +45,7 @@ Follow these steps to run the portfolio locally:
 Feel free to reach out via Email or connect on LinkedIn.
 
 sharmadhruv00005@gmail.com
-https://www.linkedin.com/in/dhruv-sharma-d005
+https://www.linkedin.com/in/dhruvsharma005
 
 ---
 

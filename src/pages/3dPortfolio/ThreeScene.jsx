@@ -11,12 +11,17 @@ import "./threeScene.css"
 import CameraControls from './components/cameraControls/cameraControls';
 import {ExternalLink} from 'lucide-react'
 
+const lightBulbPosition = new Vector3(0, 22, 0);
+const htmlCanvasPosition = new Vector3(0.84, 10.57, 0.72);
+const sceneTargetPosition = new Vector3(22, 18, -0.23);
+const screenTargetPosition = new Vector3(-0.5, 11.58, -0.23);
+
 function LightBulb() {
   return (
-    <mesh position={[0, 14, 0]}>
+    <mesh position={lightBulbPosition} castShadow>
       <sphereGeometry args={[0.5, 16, 16]} />
-      <meshBasicMaterial color="#ffcc66" />
-      <pointLight distance={40} decay={1.5} intensity={50} color="#ffcc66" />
+      <meshBasicMaterial color="#FFF1E0" />
+      <pointLight distance={40} decay={1.5} intensity={70} color="#FFF1E0" />
     </mesh>
   );
 }
@@ -31,8 +36,9 @@ function ModelWithScreen({ screenPositionRef, sceneLoading, setSceneLoading }) {
   },[scene, sceneLoading, setSceneLoading])
 
   useEffect(() => {
-    // Set the camera target to the hardcoded position [0.5, 6.6, 0.55]
-    screenPositionRef.current.set(-0.5, 7.6, -0.23);
+    // Set the camera target to the hardcoded position [0.5, 6.6, 0.55] -0.5, 7.6, -0.23
+    //[0.84, 10.57, 0.87]
+    screenPositionRef.current.set(-0.84, 10.57, -0.60);
 
     scene.traverse((child) => {
       if (child.isMesh) {
@@ -46,16 +52,16 @@ function ModelWithScreen({ screenPositionRef, sceneLoading, setSceneLoading }) {
 
   return (
       <group>
-        <primitive object={scene} scale={[0.5, 0.5, 0.5]} />
+        <primitive object={scene} scale={[0.8, 0.8, 0.8]} />
         <mesh>
         <Html
           transform
-          position={[0.5, 6.6, 0.47]}
+          position={htmlCanvasPosition}
           rotation={[0, 0.26, 0]}
           distanceFactor={1.5}
           style={{
-            width: '520px',
-            height: '400px',
+            width: '750px',
+            height: '576px',
             backgroundColor: 'rgba(0, 0, 0, 0.8)',
             overflowY: 'auto',
             border: '4px solid #333',
@@ -115,7 +121,7 @@ function AnimatedLights() {
       <hemisphereLight color="#ffffff" groundColor="#444444" intensity={0.3} />
       <spotLight
         ref={mainLight}
-        position={[0, 14, 0]}
+        position={lightBulbPosition}
         angle={0.5}
         penumbra={0.8}
         intensity={15}
@@ -131,34 +137,32 @@ function AnimatedLights() {
 export default function ThreeScene() {
   const screenPositionRef = useRef(new Vector3(0.35, 6.6, 0.3)); // Hardcoded position for screen reference
   const [orbitEnabled, setOrbitEnabled] = useState(true); // State to toggle OrbitControls
-  const [sceneTarget, setSceneTarget] = useState(new Vector3(22, 7.6, -0.23));
+  const [sceneTarget, setSceneTarget] = useState(sceneTargetPosition);
   const [sceneLoading, setSceneLoading] = useState(true);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const CameraControlsRef = useRef();
-  const [lookingAtScreen, setLookingAtScreen] = useState(false)
+  const [lookingAtScreen, setLookingAtScreen] = useState(false);
 
   // Trigger moveToScreen on button click
   const moveToScreen = () => {
     if (CameraControlsRef.current) {
-      setOrbitEnabled(false)
-      setLookingAtScreen(true)
-
+      setOrbitEnabled(false);
+      setLookingAtScreen(true);
+      //-0.5, 11.58, -0.23
       gsap.to(sceneTarget, {
         x: -0.5,
-        y: 7.6,
+        y: 11.58,
         z: -0.23,
         duration: 1,
         ease: 'power2.inOut',
         onUpdate: () => {
-          // Manually update the target of OrbitControls for smooth transition
-          setSceneTarget(new Vector3(sceneTarget.x, sceneTarget.y, sceneTarget.z));
+          setSceneTarget(screenTargetPosition);
         },
         onComplete: () => {
-          setOrbitEnabled(true);
-          CameraControlsRef.current.moveToScreen(); // Move camera to screen position
+          setOrbitEnabled(false); 
+          CameraControlsRef.current.moveToScreen();
         },
       });
-
     }
   };
 
@@ -189,18 +193,25 @@ export default function ThreeScene() {
     <>
       <Canvas
         shadows
-        camera={{ position: [22, 14, -30], fov: 70 }}
+        camera={{ position: [22, 18, -30], fov: 70 }}
         style={{ backgroundColor: '#000000', width: '100%', height: '100vh' }}
       >
+
+        {/* <mesh position={sceneTarget}>
+          <sphereGeometry args={[0.1, 16, 16]} />
+          <meshStandardMaterial color="yellow" emissive="yellow" emissiveIntensity={1.5} />
+        </mesh> */}
+
         <color attach="background" args={['#030305']} />
         <fog attach="fog" args={['#050507', 10, 500]} />
 
         <AnimatedLights />
         <Suspense fallback={null}>
           <group rotation={[0, Math.PI, 0]} position={[0, 1, 0]} onClick={()=>{
-              setSceneTarget(new Vector3(-0.5, 7.6, -0.23))
+              setSceneTarget(new Vector3(-0.5, 11.58, -0.23))
               setOrbitEnabled(true)
               setLookingAtScreen(true)
+              console.log("Clicked on the group, setting target and enabling orbit controls")
             }} >
             <ModelWithScreen screenPositionRef={screenPositionRef}  sceneLoading={sceneLoading} setSceneLoading={setSceneLoading}/>
             <ReflectiveFloor />
@@ -222,6 +233,7 @@ export default function ThreeScene() {
           rotateSpeed={0.8} // Adjust rotation speed
           zoomSpeed={1.2} // Adjust zoom speed for smoother experience
           target={sceneTarget}
+          
         />
 
         <CameraControls screenPositionRef={screenPositionRef} setOrbitEnabled={setOrbitEnabled} ref={CameraControlsRef} />

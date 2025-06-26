@@ -2,7 +2,6 @@ import React, { useRef,useImperativeHandle } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import gsap from 'gsap';
-// import * as THREE from 'three';
 
 function CameraControls({ screenPositionRef, setOrbitEnabled }, ref) {
   // const { camera, scene } = useThree();
@@ -16,15 +15,18 @@ function CameraControls({ screenPositionRef, setOrbitEnabled }, ref) {
       isTransitioning.current = true;
 
       // Animate camera position to move in front of the screen and look at the targetObject
+      // -0.5, 11.7, -0.23
+
       gsap.to(camera.position, {
-        x: screenPositionRef.current.x - 0.34,
-        y: screenPositionRef.current.y,
-        z: screenPositionRef.current.z - 1.3,
+        x: screenPositionRef.current.x - 0.28,
+        y: screenPositionRef.current.y + 1.08,
+        z: screenPositionRef.current.z - 1.9,
         duration: 2,
         ease: 'power2.inOut',
         onComplete: () => {
           isTransitioning.current = false;
-          camera.lookAt(new Vector3(-0.5, 7.6, -0.23));
+          camera.lookAt(new Vector3(-0.5, 11.58, -0.23));
+         
           setOrbitEnabled(false); // Disable OrbitControls after zooming in
         },
       });
@@ -48,30 +50,13 @@ function CameraControls({ screenPositionRef, setOrbitEnabled }, ref) {
       },
     });
   };
-
-  // useEffect(() => {
-  //   // Create a dummy object and add it to the scene at the screen position
-  //   const targetObject = new THREE.Object3D();
-  //   scene.add(targetObject);
-
-  //   const handleKeyPress = (event) => {
-  //     if (event.key === 's' && screenPositionRef.current) {
-  //       moveToScreen();
-  //     }
-  //   };
-
-  //   window.addEventListener('keydown', handleKeyPress);
-  //   return () => {
-  //     window.removeEventListener('keydown', handleKeyPress);
-  //     scene.remove(targetObject); // Cleanup the dummy object
-  //   };
-  // }, [screenPositionRef, camera, scene, setOrbitEnabled]);
-
-  // Expose moveToScreen and resetCameraPosition functions to parent through ref
+  
   useImperativeHandle(ref, () => ({
     moveToScreen,
     resetCameraPosition,
   }));
+
+  
 
   return null; // No need to render anything for CameraControls component
 }
