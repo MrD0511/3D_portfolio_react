@@ -138,6 +138,9 @@ const Portfolio = () => {
               <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl">
                 Hello! I'm Dhruv Sharma, a passionate developer and a student at SVIT Vasad College in Gujarat. I'm currently in my prefinal year, pursuing Computer Engineering.
               </p>
+              <a href="/Dhruv_Sharma_Resume.pdf" download className="bg-[#ffcc66] text-black px-6 py-3 rounded-lg font-medium hover:bg-[#ffcc66]/90 transition-colors mb-4">
+                Download Resume
+              </a>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => setActiveSection("projects")}
